@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Year Calendar</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calendar"></div>
+
+    <script src="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.js"></script>
+    <script>
+    const events = [
+        {month: 0, day: 1, name: "New Year's Day 🎉"},
+        {month: 0, day: 15, name: "Devil's Day 😈"},
+        {month: 1, day: 17, name: "Twiniee Day 💖"},
+        {month: 1, day: 14, name: "Valentine's Day ❤️"},
+        {month: 4, day: 9, name: "Mine 💛"},
+        {month: 6, day: 22, name: "Mera Hero 💪"},
+        {month: 7, day: 15, name: "AmulBaby 🎂"},
+        {month: 9, day: 7, name: "Putti's Day 🐾"},
+        {month: 10, day: 2, name: "Mother Indiaa 👑"},
+        {month: 10, day: 5, name: "Aarabbb Day 😴"},
+        {month: 10, day: 18, name: "Asthakka Day 😘"},
+        {month: 11, day: 25, name: "Appa Amma Anniversary ❤️"}
+    ];
+
+    new Calendar(document.querySelector('.calendar'), {
+    customDayRenderer: function(element, date) {
+        // check if month & day match any event (ignore year)
+        const ev = events.find(e =>
+            e.day === date.getDate() && e.month === date.getMonth()
+        );
+
+        if (ev) {
+           // ✅ Only transparent heart + date number
+          element.innerHTML = `
+            <div class="heart-day-inline" data-tooltip="${ev.name}">
+              <span class="day-number">${date.getDate()}</span>
+            </div>`;
+        } else {
+          element.textContent = date.getDate();
+        }
+    }
+});
+
+</script>
+
+</body>
+</html>
